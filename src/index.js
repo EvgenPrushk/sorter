@@ -1,31 +1,51 @@
 class Sorter {
   constructor() {
-    // your implementation
+   this.array = [];
+   this.firstCactom = (left, right) => right - left;
+   this.compareFunction = this.firstCactom;
   }
 
   add(element) {
-    // your implementation
+     this.array.push(element);
   }
 
   at(index) {
-    // your implementation
+    return this.array[index];
   }
 
   get length() {
-    // your implementation
+    return this.array.length;
   }
 
   toArray() {
-    // your implementation
+    return this.array;
   }
 
   sort(indices) {
-    // your implementation
-  }
+    var map =  [];
+    indices.sort(this.firstCactom);
+    for  (var i = 0; i < indices.length; i++) {
+      if (indices[i] >= 0 && indices[i] < this.array.length) {
+        map.push(this.array[indices[i]]);
+      } else {}
+    }
+
+      var mapSize = map.length;
+      map.sort(this.compareFunction);
+      for (var i = 0; i < mapSize; i++) {
+        this.array[indices[i]] = map.shift();
+      }
+
+    }
+  
 
   setComparator(compareFunction) {
-    // your implementation
-  }
-}
+    if (compareFunction != null) {
+      this.compareFunction = compareFunction;
+    }     else {
+      this.compareFunction = this.firstCactom;
+    }
+  };
+};
 
 module.exports = Sorter;
